@@ -9,9 +9,9 @@ struct Cli {
 
 fn main() {
     let args = Cli::parse();
-    let content = std::fs::read_to_string(&args.path).expect("can not read the file");
-    for line in content.lines() {
-        println!("{}", line)
+    let result = std::fs::read_to_string(&args.path);
+    match result {
+        Ok(c) => {println!("file content: {}", c)}
+        Err(e) => {panic!("err: {}", e)}
     }
-    println!("pattern: {:?}, path: {:?}", args.pattern, args.path)
 }
